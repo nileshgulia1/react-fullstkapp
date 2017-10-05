@@ -11,6 +11,9 @@ import {
 import Home from './Home';
 import Submit from './Submit';
 import { NavLink } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+
+const history = createBrowserHistory();
 
 
 
@@ -35,8 +38,8 @@ ReactDOM.render(
 
 <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 <ul className="nav navbar-nav">
-  <li className="active"><NavLink to="/">Home <span className="sr-only">(current)</span></NavLink></li>
-  <li><NavLink to="/submit">Submit a Recipe</NavLink></li>
+  <li><NavLink exact activeClassName="activeNav" to="/">Home <span className="sr-only">(current)</span></NavLink></li>
+  <li><NavLink activeClassName="activeNav" to="/submit">Submit a Recipe </NavLink></li>
   
 </ul>
 
@@ -46,7 +49,7 @@ ReactDOM.render(
 </nav>
 
 <Route exact path="/" component={Home}/>
-      <Route path="/submit" component={Submit}/>
+      <Route path="/submit" history={history} component={Submit}/>
   
 </div>
 
