@@ -29,7 +29,7 @@ ReactDOM.render(
   <span className="icon-bar"></span>
   <span className="icon-bar"></span>
 </button>
-<a className="navbar-brand" href="#">Awesome Recipe</a>
+<NavLink className="navbar-brand" to="/">Awesome Recipe</NavLink>
 </div>
 
 
@@ -40,10 +40,7 @@ ReactDOM.render(
   
 </ul>
 
-<ul className="nav navbar-nav navbar-right">
-  <li><a href="#">Link</a></li>
-  
-</ul>
+
 </div>
 </div>
 </nav>
