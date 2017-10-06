@@ -28,9 +28,21 @@ export default class Submit extends Component{
   
   
   <div className="form-group">
-    <label for="exampleTextarea">Description</label>
-    <textarea className="form-control" id="exampleTextarea" rows="3"></textarea>
+    <label for="description">Description</label>
+    <textarea className="form-control" id="description" placeholder="Enter the description" rows="3"></textarea>
   </div>
+  <div className="form-inline form-group">
+  <div className=" form-group">
+    <label for="quantity">Quantity </label>
+    <input type="text" className="form-control" id="quantitiy" placeholder="Enter Quantity" rows="3" />
+  </div>
+  <div className=" form-group">
+    <label for="ingredient">Ingredient </label>
+    <input type="text" className="form-control" id="ingredient" placeholder="Enter ingredients" rows="3" />
+    <button type="submit" onClick={this.submitRecipe} className="btn btn-info">Add</button>
+  </div>
+  </div>
+
   
   
   
