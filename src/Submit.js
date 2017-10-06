@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+import Ingredients from './Ingredients';
 
 
 
@@ -11,6 +12,7 @@ export default class Submit extends Component{
     }
    submitRecipe(){
        console.log("button clicked");
+       console.log(this.name.value , this.description.value);
        
    }
     render(){
@@ -21,7 +23,7 @@ export default class Submit extends Component{
            <form>
              <div className="form-group">
               <label htmlFor="name">Name</label>
-               <input type="text" className="form-control" id="name"  placeholder="Enter the name of the recipe" />
+               <input type="text" ref={(input) => {this.name = input;}} className="form-control" id="name"  placeholder="Enter the name of the recipe" />
                 
              </div>
   
@@ -29,19 +31,9 @@ export default class Submit extends Component{
   
   <div className="form-group">
     <label htmlFor="description">Description</label>
-    <textarea className="form-control" id="description" placeholder="Enter the description" rows="3"></textarea>
+    <textarea className="form-control" ref={(curry) => {this.description = curry;}} id="description" placeholder="Enter the description" rows="3"></textarea>
   </div>
-  <div className="form-inline form-group">
-  <div className=" form-group">
-    <label htmlFor="quantity">Quantity </label>
-    <input type="text" className="form-control" id="quantitiy" placeholder="Enter Quantity" rows="3" />
-  </div>
-  <div className=" form-group">
-    <label htmlFor="ingredient">Ingredient </label>
-    <input type="text" className="form-control" id="ingredient" placeholder="Enter ingredients" rows="3" />
-    <button type="submit" onClick={this.submitRecipe} className="btn btn-info">Add</button>
-  </div>
-  </div>
+  <Ingredients />
 
   
   
