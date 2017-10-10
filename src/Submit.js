@@ -7,13 +7,20 @@ import Ingredients from './Ingredients';
 export default class Submit extends Component{
     constructor(props){
         super(props);
-        this.state={};
+        this.state={
+            name: "newRecipe",
+            description: "Description",
+            ingredients: []
+        };
         this.submitRecipe=this.submitRecipe.bind(this);
     }
    submitRecipe(){
        console.log("button clicked");
        console.log(this.name.value , this.description.value);
        
+   }
+   addIngredient(quantity, ingredients){
+       console.log("Add ingredients",quantity ,ingredients);
    }
     render(){
         return (
@@ -33,7 +40,7 @@ export default class Submit extends Component{
     <label htmlFor="description">Description</label>
     <textarea className="form-control" ref={(curry) => {this.description = curry;}} id="description" placeholder="Enter the description" rows="3"></textarea>
   </div>
-  <Ingredients />
+  <Ingredients addIngredient={(quantity,ingredients) => {this.addIngredient(quantity,ingredients)}} />
 
   
   
