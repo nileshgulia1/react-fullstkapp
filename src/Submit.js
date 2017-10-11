@@ -21,6 +21,10 @@ export default class Submit extends Component{
    }
    addIngredient(quantity, ingredients){
        console.log("Add ingredients",quantity ,ingredients);
+       let newRecipe=this.state;
+       newRecipe.ingredients.push({quantity:quantity ,ingredients:ingredients});
+       this.setState({name:newRecipe});
+       console.log(newRecipe);
    }
     render(){
         return (
