@@ -9,6 +9,7 @@ export default class Submit extends Component{
     constructor(props){
         super(props);
         this.state={
+            recipes: [],
             name: "newRecipe",
             description: "Description",
             ingredients: []
@@ -22,7 +23,24 @@ export default class Submit extends Component{
        newRecipe.name=this.name.value;
        newRecipe.description=this.description.value;
        this.setState({name:newRecipe});
-       
+       let recipes=this.state.recipes;
+       recipes.push(newRecipe);
+       this.setState({recipes:recipes});
+       console.log(recipes);
+       var cache=[]; //another cache memory array used
+       localStorage.setItem('recipes',JSON.stringify(recipes, function(key, value) {
+        if (typeof value === 'object' && value !== null) {
+            if (cache.indexOf(value) !== -1) {
+                // Circular reference found, discard key
+                return;
+            }
+            // Store value in our collection
+            cache.push(value);
+        }
+        return value;
+    }));
+    
+
    }
    addIngredient(quantity, ingredients){
        console.log("Add ingredients",quantity ,ingredients);
