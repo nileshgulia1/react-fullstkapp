@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Ingredients from './Ingredients';
+import IngredientList from './IngredientList';
 
 
 
@@ -17,6 +18,10 @@ export default class Submit extends Component{
    submitRecipe(){
        console.log("button clicked");
        console.log(this.name.value , this.description.value);
+       let newRecipe=this.state;
+       newRecipe.name=this.name.value;
+       newRecipe.description=this.description.value;
+       this.setState({name:newRecipe});
        
    }
    addIngredient(quantity, ingredients){
@@ -44,6 +49,7 @@ export default class Submit extends Component{
     <label htmlFor="description">Description</label>
     <textarea className="form-control" ref={(curry) => {this.description = curry;}} id="description" placeholder="Enter the description" rows="3"></textarea>
   </div>
+  <IngredientList recipe={this.state} />
   <Ingredients addIngredient={(quantity,ingredients) => {this.addIngredient(quantity,ingredients)}} />
 
   
