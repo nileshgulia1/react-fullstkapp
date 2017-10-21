@@ -5,6 +5,7 @@ import IngredientList from './IngredientList';
 
 
 
+
 export default class Submit extends Component{
     constructor(props){
         super(props);
@@ -39,6 +40,7 @@ export default class Submit extends Component{
         }
         return value;
     }));
+    this.props.history.push('/');
     
 
    }
