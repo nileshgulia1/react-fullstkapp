@@ -9,7 +9,7 @@ export default class Submit extends Component{
     constructor(props){
         super(props);
         this.state={
-            recipes: [],
+            recipes: JSON.parse(localStorage.getItem('recipes')) || [],
             name: "newRecipe",
             description: "Description",
             ingredients: []

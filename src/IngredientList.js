@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+import Home from './Home';
 
 
 
@@ -20,6 +21,7 @@ export default class IngredientList extends Component{
         return (
             <ul>
            {this.displayIngredients()}
+        
             </ul>
 
         );
