@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Ingredients from './Ingredients';
 import IngredientList from './IngredientList';
-
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
 
 
 
@@ -16,6 +17,7 @@ export default class Submit extends Component{
             ingredients: []
         };
         this.submitRecipe=this.submitRecipe.bind(this);
+        this.onImageDrop=this.onImageDrop.bind(this);
     }
    submitRecipe(){
        console.log("button clicked");
@@ -51,12 +53,21 @@ export default class Submit extends Component{
        this.setState({name:newRecipe});
        console.log(newRecipe);
    }
+   onImageDrop(){
+       
+   }
     render(){
         return (
         <div className="row">
          <div className="col-xs-12 col-sm-12">
             <h1>Submit</h1>
            <form>
+           <Dropzone
+             multiple={false}
+             accept="image/*"
+             onDrop={this.onImageDrop()}>
+            <p>Drop an image or click to select a file to upload.</p>
+             </Dropzone>
              <div className="form-group">
               <label htmlFor="name">Name</label>
                <input type="text" ref={(input) => {this.name = input;}} className="form-control" id="name"  placeholder="Enter the name of the recipe" />
