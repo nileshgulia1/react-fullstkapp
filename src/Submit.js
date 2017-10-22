@@ -4,6 +4,9 @@ import Ingredients from './Ingredients';
 import IngredientList from './IngredientList';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
+//const CLOUDINARY_UPLOAD_PRESET = 'your_upload_preset_id';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dccttnury/upload';
+
 
 
 
@@ -14,7 +17,8 @@ export default class Submit extends Component{
             recipes: JSON.parse(localStorage.getItem('recipes')) || [],
             name: "newRecipe",
             description: "Description",
-            ingredients: []
+            ingredients: [],
+            uploadedFileCloudinaryUrl: ''
         };
         this.submitRecipe=this.submitRecipe.bind(this);
         this.onImageDrop=this.onImageDrop.bind(this);
@@ -25,6 +29,7 @@ export default class Submit extends Component{
        let newRecipe=this.state;
        newRecipe.name=this.name.value;
        newRecipe.description=this.description.value;
+       newRecipe.image=this.state.uploadedFileCloudinaryUrl;
        this.setState({name:newRecipe});
        let recipes=this.state.recipes;
        recipes.push(newRecipe);
@@ -53,9 +58,32 @@ export default class Submit extends Component{
        this.setState({name:newRecipe});
        console.log(newRecipe);
    }
-   onImageDrop(){
-       
+   onImageDrop(files){
+    this.setState({
+        uploadedFile: files[0]
+      });
+  
+      this.handleImageUpload(files[0]);
+
    }
+   handleImageUpload(file) {
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                       // .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                        .field('file', file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          uploadedFileCloudinaryUrl: response.body.secure_url
+        });
+      }
+    });
+  }
+
     render(){
         return (
         <div className="row">
@@ -65,9 +93,16 @@ export default class Submit extends Component{
            <Dropzone
              multiple={false}
              accept="image/*"
-             onDrop={this.onImageDrop()}>
+             onDrop={this.onImageDrop}>
             <p>Drop an image or click to select a file to upload.</p>
              </Dropzone>
+             <div>
+                  {this.state.uploadedFileCloudinaryUrl === '' ? null :
+            <div>
+              <p>{this.state.uploadedFile.name}</p>
+               <img alt={this.state.uploadedFile.name} src={this.state.uploadedFileCloudinaryUrl} />
+            </div>}
+             </div>
              <div className="form-group">
               <label htmlFor="name">Name</label>
                <input type="text" ref={(input) => {this.name = input;}} className="form-control" id="name"  placeholder="Enter the name of the recipe" />

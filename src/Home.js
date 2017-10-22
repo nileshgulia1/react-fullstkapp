@@ -16,6 +16,7 @@ export default class Home extends Component{
         this.state.recipes.map((recipe,i) => {
             resultsArray.push(
                 <div className="col-sm-4">
+                <img src={recipe.image} alt={recipe.name} className="img-thumbnail" />
                 {recipe.name}<br />
                 {recipe.description}<br />
                 
